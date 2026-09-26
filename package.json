@@ -1,0 +1,10 @@
+{
+  "name": "project-diy",
+  "version": "0.1.0",
+  "description": "A local-first desktop application for managing home DIY projects.",
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}
