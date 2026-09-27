@@ -6,12 +6,24 @@
   "license": "GPL-3.0-or-later",
   "main": "dist/main.js",
   "scripts": {
-    "build": "tsc",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build:main": "tsc",
+    "typecheck:renderer": "tsc --project src/renderer/tsconfig.json",
+    "build:renderer": "vite build",
+    "build": "npm run clean && npm run build:main && npm run typecheck:renderer && npm run build:renderer",
     "start": "npm run build && electron ."
   },
   "devDependencies": {
     "@types/node": "^26.6.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
     "electron": "^44.4.5",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1"
+  },
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   }
 }

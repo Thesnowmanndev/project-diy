@@ -1,4 +1,4 @@
-import {app, BrowserWindow } from 'electron';
+import { app, BrowserWindow } from 'electron';
 import { join } from 'node:path';
 
 function createWindow(): void {
@@ -15,7 +15,7 @@ function createWindow(): void {
     });
 
     mainWindow.loadFile(
-        join(app.getAppPath(), "src", "renderer", "index.html")
+        join(app.getAppPath(), "dist", "renderer", "index.html")
     );
 }
 
