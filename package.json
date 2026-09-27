@@ -4,7 +4,14 @@
   "description": "A local-first desktop application for managing home DIY projects.",
   "private": true,
   "license": "GPL-3.0-or-later",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && electron ."
+  },
   "devDependencies": {
+    "@types/node": "^26.6.3",
+    "electron": "^44.4.5",
     "typescript": "^7.0.2"
   }
 }
