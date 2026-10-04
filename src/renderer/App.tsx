@@ -1,99 +1,101 @@
-import { ProjectCard } from "./components/ProjectCard";
+import { useState } from "react";
 
-import type { Area } from "./types/area";
-import type { Home } from "./types/home";
-import type { Project } from "./types/project";
+import type { AppView } from "./types/view";
 
-const home: Home = {
-    id: 1,
-    name: "My Home"
-};
-
-const areas: Area[] = [
-    {
-        id: 1,
-        name: "Kitchen",
-        type: "room"
-    },
-    {
-        id: 2,
-        name: "Guest Bathroom",
-        type: "room"
-    },
-    {
-        id: 3,
-        name: "Garage",
-        type: "garage"
-    },
-    {
-        id: 4,
-        name: "Front Yard",
-        type: "yard"
-    },
-    {
-        id: 5,
-        name: "Back Yard",
-        type: "yard"
-    }
-];
-
-const projects: Project[] = [
-    {
-        id: 1,
-        areaId: 2,
-        name: "Replace Bathroom Floor",
-        description:
-            "Remove the existing flooring and install new tile.",
-        status: "planned",
-        budget: 1500,
-        completedTasks: 0,
-        totalTasks: 6
-    },
-    {
-        id: 2,
-        areaId: 3,
-        name: "Garage Shelving",
-        description:
-            "Build wall-mounted storage for tools and supplies.",
-        status: "active",
-        budget: 450,
-        completedTasks: 2,
-        totalTasks: 5
-    }
-];
+import { AreasView } from "./views/AreasView";
+import { DashboardView } from "./views/DashboardView";
+import { ProjectsView } from "./views/ProjectsView";
+import { SettingsView } from "./views/SettingsView";
 
 export function App() {
+    const [currentView, setCurrentView] =
+        useState<AppView>("dashboard");
+
+    function renderView() {
+        switch (currentView) {
+            case "areas":
+                return <AreasView />;
+
+            case "projects":
+                return <ProjectsView />;
+
+            case "settings":
+                return <SettingsView />;
+
+            case "dashboard":
+            default:
+                return <DashboardView />;
+        }
+    }
+
     return (
-        <div className="app">
-            <header className="app-header">
-                <strong className="app-title">
+        <div className="app-shell">
+            <aside className="sidebar">
+                <div className="sidebar__brand">
                     Project DIY
-                </strong>
-
-                <button type="button">
-                    + New Project
-                </button>
-            </header>
-
-            <main className="content">
-                <div className="page-heading">
-                    <div>
-                        <h1>Projects</h1>
-
-                        <p>
-                            {home.name} · {areas.length} areas
-                        </p>
-                    </div>
                 </div>
 
-                <section className="project-list">
-                    {projects.map((project) => (
-                        <ProjectCard
-                            key={project.id}
-                            project={project}
-                        />
-                    ))}
-                </section>
+                <nav className="sidebar__nav">
+                    <button
+                        className={
+                            currentView === "dashboard"
+                                ? "nav-item nav-item--active"
+                                : "nav-item"
+                        }
+                        type="button"
+                        onClick={() =>
+                            setCurrentView("dashboard")
+                        }
+                    >
+                        Dashboard
+                    </button>
+
+                    <button
+                        className={
+                            currentView === "areas"
+                                ? "nav-item nav-item--active"
+                                : "nav-item"
+                        }
+                        type="button"
+                        onClick={() =>
+                            setCurrentView("areas")
+                        }
+                    >
+                        Areas
+                    </button>
+
+                    <button
+                        className={
+                            currentView === "projects"
+                                ? "nav-item nav-item--active"
+                                : "nav-item"
+                        }
+                        type="button"
+                        onClick={() =>
+                            setCurrentView("projects")
+                        }
+                    >
+                        Projects
+                    </button>
+                </nav>
+
+                <button
+                    className={
+                        currentView === "settings"
+                            ? "nav-item nav-item--active sidebar__settings"
+                            : "nav-item sidebar__settings"
+                    }
+                    type="button"
+                    onClick={() =>
+                        setCurrentView("settings")
+                    }
+                >
+                    Settings
+                </button>
+            </aside>
+
+            <main className="main-content">
+                {renderView()}
             </main>
         </div>
     );

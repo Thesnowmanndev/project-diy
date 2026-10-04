@@ -1,5 +1,7 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu } from 'electron';
 import { join } from 'node:path';
+
+Menu.setApplicationMenu(null);
 
 function createWindow(): void {
     const mainWindow = new BrowserWindow({
