@@ -5,8 +5,19 @@ import type { Project } from "../types/project";
 export const home: Home = {
     id: 1,
     name: "My Home",
+    homeType: "single-family",
     yearBuilt: 2005,
-    squareFeet: 2100
+    lotSquareFeet: 8712,
+    livableSquareFeet: 2100,
+    bedrooms: 3,
+    fullBathrooms: 2,
+    halfBathrooms: 1,
+    heatingType: "heat-pump",
+    coolingType: "central-air",
+    roofMaterial: "asphalt-shingle",
+    garageType: "attached",
+    garageSpaces: 2,
+    parcelNumber: "123-45-67-890"
 };
 
 export const areas: Area[] = [

@@ -1,1 +1,1 @@
-export type AppView = "dashboard" | "areas" | "projects" | "settings";
+export type AppView = "dashboard" | "areas" | "projects" | "settings" | "edit-home";

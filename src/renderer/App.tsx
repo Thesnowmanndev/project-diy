@@ -6,6 +6,7 @@ import { AreasView } from "./views/AreasView";
 import { DashboardView } from "./views/DashboardView";
 import { ProjectsView } from "./views/ProjectsView";
 import { SettingsView } from "./views/SettingsView";
+import { EditHomeView } from "./views/EditHomeView";
 
 export function App() {
     const [currentView, setCurrentView] =
@@ -22,9 +23,18 @@ export function App() {
             case "settings":
                 return <SettingsView />;
 
+            case "edit-home":
+                return <EditHomeView />;
+
             case "dashboard":
             default:
-                return <DashboardView />;
+                return (
+                    <DashboardView
+                        onEditHome={() =>
+                            setCurrentView("edit-home")
+                        }
+                    />
+                );
         }
     }
 
