@@ -1,6 +1,9 @@
 import { useState } from "react";
 
+import { home as initialHome } from "./data/mockData";
+
 import type { AppView } from "./types/view";
+import type { Home } from "./types/home";
 
 import { AreasView } from "./views/AreasView";
 import { DashboardView } from "./views/DashboardView";
@@ -11,6 +14,9 @@ import { EditHomeView } from "./views/EditHomeView";
 export function App() {
     const [currentView, setCurrentView] =
         useState<AppView>("dashboard");
+
+    const [home, setHome] =
+        useState<Home>(initialHome);
 
     function renderView() {
         switch (currentView) {
@@ -24,12 +30,24 @@ export function App() {
                 return <SettingsView />;
 
             case "edit-home":
-                return <EditHomeView />;
+                return (
+                    <EditHomeView
+                        home={home}
+                        onSave={(updatedHome) => {
+                            setHome(updatedHome);
+                            setCurrentView("dashboard");
+                        }}
+                        onCancel={() =>
+                            setCurrentView("dashboard")
+                        }
+                    />
+                );
 
             case "dashboard":
             default:
                 return (
                     <DashboardView
+                        home={home}
                         onEditHome={() =>
                             setCurrentView("edit-home")
                         }

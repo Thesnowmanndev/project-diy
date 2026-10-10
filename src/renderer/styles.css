@@ -173,6 +173,10 @@ button:hover {
     gap: 20px;
 }
 
+.dashboard-section+.dashboard-section {
+    margin-top: 32px;
+}
+
 .section-heading {
     display: flex;
     align-items: flex-end;
@@ -490,4 +494,17 @@ button:hover {
     .form-grid {
         grid-template-columns: 1fr;
     }
+}
+
+.form-actions {
+    gap: 12px;
+}
+
+.button-secondary {
+    color: #263238;
+    background: #e7ebee;
+}
+
+.button-secondary:hover {
+    background: #d9dfe3;
 }

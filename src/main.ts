@@ -1,6 +1,7 @@
 import { app, BrowserWindow, Menu } from 'electron';
 import { join } from 'node:path';
 
+// Hide File, Edit, View status bar
 Menu.setApplicationMenu(null);
 
 function createWindow(): void {
@@ -15,6 +16,8 @@ function createWindow(): void {
             sandbox: true,
         }
     });
+
+    mainWindow.maximize();
 
     mainWindow.loadFile(
         join(app.getAppPath(), "dist", "renderer", "index.html")

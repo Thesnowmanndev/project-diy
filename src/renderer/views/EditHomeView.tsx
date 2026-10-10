@@ -1,6 +1,22 @@
-import { home } from "../data/mockData";
+import { useState } from "react";
 
-export function EditHomeView() {
+import type { Home } from "../types/home";
+
+interface EditHomeViewProps {
+    home: Home;
+    onSave: (home: Home) => void;
+    onCancel: () => void;
+}
+
+export function EditHomeView({
+    home,
+    onSave,
+    onCancel
+}: EditHomeViewProps) {
+
+    const [draftHome, setDraftHome] =
+        useState<Home>({ ...home });
+
     return (
         <>
             <header className="page-header">
@@ -37,14 +53,31 @@ export function EditHomeView() {
 
                         <input
                             type="text"
-                            defaultValue={home.name}
+                            value={draftHome.name}
+                            onChange={(event) =>
+                                setDraftHome({
+                                    ...draftHome,
+                                    name: event.target.value
+                                })
+                            }
                         />
                     </label>
 
                     <label className="form-field">
                         <span>Home Type</span>
 
-                        <select defaultValue={home.homeType}>
+                        <select
+                            value={draftHome.homeType ?? ""}
+                            onChange={(event) =>
+                                setDraftHome({
+                                    ...draftHome,
+                                    homeType:
+                                        event.target.value === ""
+                                            ? undefined
+                                            : event.target.value as Home["homeType"]
+                                })
+                            }
+                        >
                             <option value="">
                                 Select home type
                             </option>
@@ -80,7 +113,16 @@ export function EditHomeView() {
 
                         <input
                             type="number"
-                            defaultValue={home.yearBuilt}
+                            value={draftHome.yearBuilt ?? ""}
+                            onChange={(event) =>
+                                setDraftHome({
+                                    ...draftHome,
+                                    yearBuilt:
+                                        event.target.value === ""
+                                            ? undefined
+                                            : Number(event.target.value)
+                                })
+                            }
                         />
                     </label>
 
@@ -90,7 +132,16 @@ export function EditHomeView() {
                         <div className="input-with-unit">
                             <input
                                 type="number"
-                                defaultValue={home.lotSquareFeet}
+                                value={draftHome.lotSquareFeet ?? ""}
+                                onChange={(event) =>
+                                    setDraftHome({
+                                        ...draftHome,
+                                        lotSquareFeet:
+                                            event.target.value === ""
+                                                ? undefined
+                                                : Number(event.target.value)
+                                    })
+                                }
                             />
 
                             <span>sq ft</span>
@@ -103,7 +154,16 @@ export function EditHomeView() {
                         <div className="input-with-unit">
                             <input
                                 type="number"
-                                defaultValue={home.livableSquareFeet}
+                                value={draftHome.livableSquareFeet ?? ""}
+                                onChange={(event) =>
+                                    setDraftHome({
+                                        ...draftHome,
+                                        livableSquareFeet:
+                                            event.target.value === ""
+                                                ? undefined
+                                                : Number(event.target.value)
+                                    })
+                                }
                             />
 
                             <span>sq ft</span>
@@ -115,7 +175,17 @@ export function EditHomeView() {
 
                         <input
                             type="number"
-                            defaultValue={home.bedrooms}
+                            min="0"
+                            value={draftHome.bedrooms ?? ""}
+                            onChange={(event) =>
+                                setDraftHome({
+                                    ...draftHome,
+                                    bedrooms:
+                                        event.target.value === ""
+                                            ? undefined
+                                            : Number(event.target.value)
+                                })
+                            }
                         />
                     </label>
 
@@ -124,7 +194,17 @@ export function EditHomeView() {
 
                         <input
                             type="number"
-                            defaultValue={home.fullBathrooms}
+                            min="0"
+                            value={draftHome.fullBathrooms ?? ""}
+                            onChange={(event) =>
+                                setDraftHome({
+                                    ...draftHome,
+                                    fullBathrooms:
+                                        event.target.value === ""
+                                            ? undefined
+                                            : Number(event.target.value)
+                                })
+                            }
                         />
                     </label>
 
@@ -133,14 +213,35 @@ export function EditHomeView() {
 
                         <input
                             type="number"
-                            defaultValue={home.halfBathrooms}
+                            min="0"
+                            value={draftHome.halfBathrooms ?? ""}
+                            onChange={(event) =>
+                                setDraftHome({
+                                    ...draftHome,
+                                    halfBathrooms:
+                                        event.target.value === ""
+                                            ? undefined
+                                            : Number(event.target.value)
+                                })
+                            }
                         />
                     </label>
 
                     <label className="form-field">
                         <span>Heating</span>
 
-                        <select defaultValue={home.heatingType}>
+                        <select
+                            value={draftHome.heatingType ?? ""}
+                            onChange={(event) =>
+                                setDraftHome({
+                                    ...draftHome,
+                                    heatingType:
+                                        event.target.value === ""
+                                            ? undefined
+                                            : event.target.value as Home["heatingType"]
+                                })
+                            }
+                        >
                             <option value="">Select heating</option>
                             <option value="heat-pump">Heat Pump</option>
                             <option value="gas-furnace">Gas Furnace</option>
@@ -158,7 +259,18 @@ export function EditHomeView() {
                     <label className="form-field">
                         <span>Cooling</span>
 
-                        <select defaultValue={home.coolingType}>
+                        <select
+                            value={draftHome.coolingType ?? ""}
+                            onChange={(event) =>
+                                setDraftHome({
+                                    ...draftHome,
+                                    coolingType:
+                                        event.target.value === ""
+                                            ? undefined
+                                            : event.target.value as Home["coolingType"]
+                                })
+                            }
+                        >
                             <option value="">Select cooling</option>
                             <option value="central-air">Central Air</option>
                             <option value="heat-pump">Heat Pump</option>
@@ -174,7 +286,18 @@ export function EditHomeView() {
                     <label className="form-field">
                         <span>Parking / Garage</span>
 
-                        <select defaultValue={home.garageType}>
+                        <select
+                            value={draftHome.garageType ?? ""}
+                            onChange={(event) =>
+                                setDraftHome({
+                                    ...draftHome,
+                                    garageType:
+                                        event.target.value === ""
+                                            ? undefined
+                                            : event.target.value as Home["garageType"]
+                                })
+                            }
+                        >
                             <option value="">Select garage type</option>
                             <option value="none">None</option>
                             <option value="attached">Attached Garage</option>
@@ -189,14 +312,35 @@ export function EditHomeView() {
 
                         <input
                             type="number"
-                            defaultValue={home.garageSpaces}
+                            min="0"
+                            value={draftHome.garageSpaces ?? ""}
+                            onChange={(event) =>
+                                setDraftHome({
+                                    ...draftHome,
+                                    garageSpaces:
+                                        event.target.value === ""
+                                            ? undefined
+                                            : Number(event.target.value)
+                                })
+                            }
                         />
                     </label>
 
                     <label className="form-field">
                         <span>Roof Material</span>
 
-                        <select defaultValue={home.roofMaterial}>
+                        <select
+                            value={draftHome.roofMaterial ?? ""}
+                            onChange={(event) =>
+                                setDraftHome({
+                                    ...draftHome,
+                                    roofMaterial:
+                                        event.target.value === ""
+                                            ? undefined
+                                            : event.target.value as Home["roofMaterial"]
+                                })
+                            }
+                        >
                             <option value="">Select roof material</option>
                             <option value="asphalt-shingle">
                                 Asphalt Shingle
@@ -217,13 +361,33 @@ export function EditHomeView() {
 
                         <input
                             type="text"
-                            defaultValue={home.parcelNumber}
+                            value={draftHome.parcelNumber ?? ""}
+                            onChange={(event) =>
+                                setDraftHome({
+                                    ...draftHome,
+                                    parcelNumber:
+                                        event.target.value === ""
+                                            ? undefined
+                                            : event.target.value
+                                })
+                            }
                         />
                     </label>
                 </div>
 
                 <div className="form-actions">
-                    <button type="button">
+                    <button
+                        className="button-secondary"
+                        type="button"
+                        onClick={onCancel}
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="button"
+                        onClick={() => onSave(draftHome)}
+                    >
                         Save Changes
                     </button>
                 </div>

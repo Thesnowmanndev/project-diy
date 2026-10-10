@@ -2,9 +2,10 @@ import { PropertyDetail } from "../components/PropertyDetail";
 import { StatCard } from "../components/StatCard";
 
 import {
-    home,
     projects
 } from "../data/mockData";
+
+import type { Home } from "../types/home";
 
 import {
     formatCoolingType,
@@ -16,10 +17,12 @@ import {
 } from "../utils/home";
 
 interface DashboardViewProps {
+    home: Home;
     onEditHome: () => void;
 }
 
 export function DashboardView({
+    home,
     onEditHome
 }: DashboardViewProps) {
     const activeProjects = projects.filter(
